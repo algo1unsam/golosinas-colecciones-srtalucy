@@ -127,6 +127,9 @@ object pastilla inherits Golosina (precio=0, sabor="frutilla", peso = 5, gluten=
 object mariano {
     var property bolsa = []
     var property flavors = #{}
+    var property golosinasDeseadas=#{"oblea, bombon, caramelo"}
+    var property gustosDeseados=#{"chocolate", "vainilla"}
+
 
     method comprar(unaGolosina){
         bolsa.add(unaGolosina)
@@ -169,5 +172,21 @@ object mariano {
 
     method pesoGolosinas(){
         return bolsa.sum({golosina=>golosina.peso()})
+    }
+    
+    method golosinasFaltantes(){
+        const faltantes=#{}
+
+        golosinasDeseadas.forEach({golosinaDeseada=> if (!bolsa.contains(golosinaDeseada)){faltantes.add(golosinaDeseada)}})
+        return faltantes
+    }
+
+    method gustosFaltantes(){
+        const faltantes=#{}
+        gustosDeseados.forEach({gustoDeseado=>
+        if(!bolsa.contains(gustoDeseado)){
+            faltantes.add(gustoDeseado)
+        }})
+        return faltantes
     }
 }
